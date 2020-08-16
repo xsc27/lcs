@@ -1,0 +1,24 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+# Abstract dependancies of this package should be maintained in setup.cfg.
+# Concrete dependancies should be defined here.
+# see, https://packaging.python.org/discussions/install-requires-vs-requirements/
+lcs_api = {editable = true, path = "."}
+
+[dev-packages]
+lcs_api = {editable = true, extras = ["docs", "lint", "test"], path = "."}
+better_exceptions = {version = "*", index = "pypi"}
+mypy = {version = "*", index = "pypi"}
+notebook = {version = "*", index = "pypi"}
+
+[requires]
+# Can a specific verions of Python.
+
+[scripts]
+build = "python setup.py sdist bdist_wheel"
+publish = "twine upload -r testpypi dist/*"
+venv = "pipenv install --dev --skip-lock"
