@@ -8,7 +8,7 @@ from itertools import chain
 from typing import Sequence
 
 
-@lru_cache
+@lru_cache()
 def _pmatches(str1: str, str2: str, size: str = -1) -> Sequence[str]:
     logging.debug("str1=%s, str2=%s, size=%s", str1, str2, size)
     if str1 == str2:
