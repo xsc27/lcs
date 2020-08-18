@@ -1,6 +1,8 @@
-"""LCS API top level."""
+"""LCS top level module."""
 import logging
 from importlib import import_module
+
+from lcs.main import matches
 
 
 # importlib.metadata is implemented in Python 3.8

@@ -1,7 +1,7 @@
 """Configuration for tests."""
-import lcs_api
+import lcs
 
 
 def pytest_report_header():
     """Additional report header."""
-    return f"version: {lcs_api.__version__}"
+    return f"version: {lcs.__version__}"
