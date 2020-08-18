@@ -1,4 +1,4 @@
-name: Allow Fails
+name: Known Fails
 
 on: [push, pull_request]
 
@@ -10,15 +10,15 @@ env:
 jobs:
   py:
     name: Pytest
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
       matrix:
-        python-version: ['3.9-dev', '3.10-dev']
+        os: [windows-latest]
+        python-version: [pypy3]
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
-      uses: deadsnakes/action@v1.0.0
+      uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
     - run: python -m pip install tox
