@@ -1,32 +1,77 @@
-=======
-LCS API
-=======
-.. image:: https://github.com/cmeza99/lcs-api/workflows/Tests/badge.svg?branch=master
-     :target: https://github.com/cmeza99/lcs-api/actions?workflow=Tests
+===
+LCS
+===
+.. image:: https://github.com/cmeza99/lcs/workflows/Tests/badge.svg?branch=master
+     :target: https://github.com/cmeza99/lcs/actions?workflow=Tests
      :alt: CI Status
 
-Longest Common Substring API
+Longest Common Substring and API
 
 Installation
 ============
 .. code-block:: console
 
-   pip install git+https://github.com/cmeza99/lcs-api.git
+   pip install git+https://github.com/cmeza99/lcs.git
 
 Usage
 =====
 
 CLI
 ---
+
+`lcs`
+
 .. code-block:: console
 
-   lcs_api --help
+   usage: lcs [-h] [-v] STRING STRING [STRING ...]
+
+   LCS CLI Help
+
+   positional arguments:
+     STRING
+     STRING         Strings to be queried (at least 2).
+
+   optional arguments:
+     -h, --help     show this help message and exit
+     -v, --version  show program's version number and exit
 
 Module
 ------
 .. code-block:: console
 
-   python3 -m lcs_api --help
+   python3 -m lcs --help
+
+API Server
+==========
+
+Start Locally
+-------------
+
+To start the web app at http://localhost:8000/:
+
+.. code-block:: console
+
+   pip3 install uvicorn
+   uvicorn lcs.web:app --reload
+
+API CLI
+-------
+
+`lcs-api`
+
+.. code-block:: console
+
+   usage: lcs-api [-h] [-v] [--url URL] FILE
+
+   LCS CLI Help
+
+   positional arguments:
+     FILE           JSON data.
+
+   optional arguments:
+     -h, --help     show this help message and exit
+     -v, --version  show program's version number and exit
+     --url URL      Url for the LCS web app (default: http://localhost:8000).
 
 License
 =======
