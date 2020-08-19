@@ -4,15 +4,13 @@ from typing import List, Sequence
 
 from fastapi import FastAPI
 from pydantic import BaseModel, Field, validator
-from starlette.applications import Starlette
 from starlette.responses import RedirectResponse
 from starlette.staticfiles import StaticFiles
 
 from lcs.main import matches
 
 
-API = FastAPI(title="LCS", description="Longest Common String")
-APP = Starlette()
+APP = FastAPI(title="LCS", description="Longest Common String",)
 
 
 class String(BaseModel):
@@ -42,16 +40,16 @@ class LCSResults(BaseModel):
     lcs: Sequence[String]
 
 
-@API.post("/", response_model=LCSResults, tags=["Query"])
+@APP.post("/lcs", response_model=LCSResults, tags=["Query"])
 async def query(strings: SetOfStrings):
     """Endpoint to search for LCS."""
     return LCSResults(lcs=[String(value=x_) for x_ in matches(strings.setOfStrings)])
 
 
-@API.get("/", tags=["Redirect"])
+@APP.get("/lcs", tags=["Redirect"])
 async def to_docs():
     """Redirects from API root to OpenAPI documention."""
-    return RedirectResponse(url="/lcs/docs")
+    return RedirectResponse(url="lcs/docs")
 
 
 def main():
@@ -59,7 +57,6 @@ def main():
     web_dir = Path(__file__).parent.joinpath("html")
     APP.add_route("/", StaticFiles(directory=web_dir, html=True), name="home")
     APP.mount("/css", StaticFiles(directory=web_dir.joinpath("css")), name="css")
-    APP.mount("/lcs", API, name="api")
 
 
 if __name__ == "__main__":
